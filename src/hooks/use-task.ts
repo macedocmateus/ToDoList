@@ -10,7 +10,6 @@ export default function useTask() {
       {
         id: Math.random().toString().substring(2, 9),
         title: '',
-        concluded: false,
         state: TaskState.Creating,
       },
     ])
@@ -30,8 +29,15 @@ export default function useTask() {
     )
   }
 
+  function updateTaskStatus(id: string, concluded: boolean) {
+    setTasks(
+      tasks.map(task => (task.id === id ? { ...task, concluded } : task))
+    )
+  }
+
   return {
     prepareTask,
     updateTask,
+    updateTaskStatus,
   }
 }
